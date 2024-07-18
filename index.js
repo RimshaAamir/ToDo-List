@@ -1,64 +1,84 @@
 
-        document.getElementById("btn").addEventListener("click", newTask);
+document.getElementById("btn").addEventListener("click", newTask);
 
-        function newTask() {
-            let taskInput = document.getElementById("taskInput").value;
-            if (taskInput !== "") {
-                let myNewTask = document.createElement("div");
-                myNewTask.className = 'myNewTask';
+function newTask() {
+    let taskInput = document.getElementById("taskInput").value;
+    if (taskInput !== "") {
+        let myNewTask = document.createElement("div");
+        myNewTask.className = 'myNewTask';
 
-                let checkBox = document.createElement("input");
-                checkBox.type = "checkbox";
-                checkBox.className = 'checkbox';
+        let checkBox = document.createElement("input");
+        checkBox.type = "checkbox";
+        checkBox.className = 'checkbox';
 
-                let newDescription = document.createElement("p");
-                newDescription.textContent = taskInput;
-                newDescription.className = "grow";
+        let newDescription = document.createElement("p");
+        newDescription.textContent = taskInput;
+        newDescription.className = "grow";
 
-                checkBox.addEventListener("change", function () {
-                    toggleTaskContainer(checkBox, myNewTask, newDescription);
-                });
+        checkBox.addEventListener("change", function () {
+            toggleTaskContainer(checkBox, myNewTask, newDescription);
+        });
 
-                let deleteTask = document.createElement("img");
-                deleteTask.src = 'images/delete-bucket.png';  // Update with your image path
-                deleteTask.alt = 'Delete';
-                deleteTask.className = 'delTask';
+        let editTask= document.createElement("button");
+        editTask.setAttribute("onclick","edit(this)");
+        editTask.textContent="edit";
 
-                deleteTask.addEventListener("click", function () {
-                    myNewTask.remove();
-                });
+        let deleteTask = document.createElement("img");
+        deleteTask.src = 'images/delete-bucket.png';  // Update with your image path
+        deleteTask.alt = 'Delete';
+        deleteTask.className = 'delTask';
 
-                myNewTask.appendChild(checkBox);
-                myNewTask.appendChild(newDescription);
-                myNewTask.appendChild(deleteTask);
-                document.getElementById('taskContainer').appendChild(myNewTask);
+        deleteTask.addEventListener("click", function () {
+            myNewTask.remove();
+        });
 
-                document.getElementById("taskInput").value = "";
-            } else {
-                alert("Please enter a task.");
-            }
-        }
+        myNewTask.appendChild(checkBox);
+        myNewTask.appendChild(newDescription);
+        myNewTask.appendChild(deleteTask);
+        myNewTask.appendChild(editTask);
+        document.getElementById('unchecked').appendChild(myNewTask);
+        document.getElementById("taskInput").value = "";
+    } else {
+        alert("Please enter a task.");
+    }
+}
 
-        function toggleTaskContainer(checkbox, task, description) {
-            let taskContainer = document.getElementById('taskContainer');
-            let completedTasksContainer = document.getElementById('completedTasksContainer');
+function toggleTaskContainer(checkbox, task, description) {
+    let checkedContainer = document.getElementById('checked');
+    if (checkbox.checked) {
+        description.style.textDecoration = "line-through";
+        checkedContainer.insertBefore(task,checkedContainer.firstChild)
+    } else {
+        description.style.textDecoration = "none";
+        document.getElementById('unchecked').appendChild(task);
+    }
+}
 
-            if (checkbox.checked) {
-                description.style.textDecoration = "line-through";
-                // Create the completed tasks container if it doesn't exist
-                if (!completedTasksContainer) {
-                    completedTasksContainer = document.createElement('div');
-                    completedTasksContainer.id = 'completedTasksContainer';
-                    completedTasksContainer.className="bg-red-300";
-                    let completedTasksHeader = document.createElement('h2');
-                    //completedTasksHeader.textContent = 'Completed Tasks';
-                    completedTasksContainer.appendChild(completedTasksHeader);
-                    document.getElementById('taskContainer').appendChild(completedTasksContainer);
-                }
-                completedTasksContainer.insertBefore(task, completedTasksContainer.firstChild.nextSibling);
-            } else {
-                description.style.textDecoration = "none";
-                taskContainer.appendChild(task);
-            }
-        }
 
+function edit(myThis) {
+    let myCurrentTask = myThis.parentNode;
+    let paragraph = myCurrentTask.querySelector('p');
+    let inputField = document.createElement('input');
+    inputField.type = 'text'; 
+    inputField.value = paragraph.textContent; 
+    myCurrentTask.replaceChild(inputField, paragraph);
+    myThis.textContent = "Ok";
+    myThis.onclick = function() {
+        ok(myThis);
+    };
+}
+
+function ok(myThis) {  
+    console.log(myThis);
+    let myCurrentTask = myThis.parentNode;
+    let inputField = myCurrentTask.querySelector('input[type="text"]');
+    let paragraph = document.createElement('p');
+    paragraph.className = "grow";
+    paragraph.textContent = inputField.value;
+    myCurrentTask.replaceChild(paragraph, inputField);
+    myThis.textContent = "Edit";
+    myThis.onclick = function() {
+        edit(myThis);
+    };
+
+}

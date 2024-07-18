@@ -1851,9 +1851,14 @@ html {
   background-color: rgb(255 0 0 / var(--tw-bg-opacity));
 }
 
-.bg-white {
+.bg-indigo-950 {
   --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: rgb(30 27 75 / var(--tw-bg-opacity));
+}
+
+.bg-lime-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(132 204 22 / var(--tw-bg-opacity));
 }
 
 .bg-red-300 {
@@ -1861,9 +1866,14 @@ html {
   background-color: rgb(252 165 165 / var(--tw-bg-opacity));
 }
 
-.bg-yellow-300 {
+.bg-slate-50 {
   --tw-bg-opacity: 1;
-  background-color: rgb(253 224 71 / var(--tw-bg-opacity));
+  background-color: rgb(248 250 252 / var(--tw-bg-opacity));
+}
+
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .decoration-slice {
@@ -2552,6 +2562,12 @@ html {
 .completedTasksContainer {
   display: flex;
   justify-content: center;
+}
+
+input[type="text"] {
+  background-color: transparent;
+  outline-width: 1px;
+  outline-color: rgb(248 250 252 / 0.15);
 }
 
 @media (min-width: 640px) {
