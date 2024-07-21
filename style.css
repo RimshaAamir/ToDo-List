@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 #btn {
-  @apply  bg-rose-900 rounded-2xl px-4 justify-items-end text-white;
+  @apply bg-indigo-600 hover:bg-indigo-700 rounded-2xl px-4 justify-items-end text-white transition;
 }
 
 .delTask {
@@ -11,11 +11,11 @@
 }
 
 .myNewTask {
-  @apply flex flex-row items-start py-2 border rounded-lg text-wrap whitespace-normal break-words mt-2 bg-red-50 border-gray-400;
+  @apply flex flex-row items-start py-2 border rounded-lg text-wrap whitespace-normal break-words mt-2 bg-indigo-100 border-gray-300 text-gray-900;
 }
 
 .checkbox {
-  @apply mt-1 mx-3; 
+  @apply mt-1 mx-3 ; 
 }
 
 .completedTasksContainer{
@@ -24,12 +24,12 @@
 
 
 input[type="text"]{
-  @apply bg-transparent outline-slate-50/15 outline-1 ;
+  @apply bg-transparent outline-none text-gray-700 placeholder-gray-400 focus:bg-transparent ;
 }
 
 @layer base{
 
 html{
-  @apply bg-gradient-to-r from-blue-900 via-purple-900 to-purple-700;
+  @apply bg-gradient-to-r from-blue-100 via-blue-200 to-blue-300;
 }
 }
